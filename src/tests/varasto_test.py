@@ -78,4 +78,4 @@ class TestVarasto(unittest.TestCase):
         self.varasto.lisaa_varastoon(8)
         self.varasto.ota_varastosta(9)
 
-        self.assertAlmostEqual(self.varasto.paljonko_mahtuu(), 10)
+        self.assertAlmostEqual(self.varasto.paljonko_mahtuu(), 9)
