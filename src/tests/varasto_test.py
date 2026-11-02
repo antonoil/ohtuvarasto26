@@ -73,7 +73,7 @@ class TestVarasto(unittest.TestCase):
         self.varasto.lisaa_varastoon(3)
 
         self.assertAlmostEqual(self.varasto.saldo, 10)
-    
+
     def test_ottaminen_palauttaa_kaiken_jos_otetaan_liikaa(self):
         self.varasto.lisaa_varastoon(8)
         self.varasto.ota_varastosta(9)
