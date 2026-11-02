@@ -13,10 +13,33 @@ class TestVarasto(unittest.TestCase):
     def test_uudella_varastolla_oikea_tilavuus(self):
         self.assertAlmostEqual(self.varasto.tilavuus, 10)
 
+    def test_merkkijono_esittaa_saldon_ja_vapaan_tilan(self):
+        self.assertEqual(str(self.varasto), "saldo = 0, vielä tilaa 10")
+
+    def test_virheellinen_tilavuus_nollataan(self):
+        varasto = Varasto(0)
+
+        self.assertAlmostEqual(varasto.tilavuus, 0)
+
+    def test_negatiivinen_alkusaldo_nollataan(self):
+        varasto = Varasto(10, -1)
+
+        self.assertAlmostEqual(varasto.saldo, 0)
+
+    def test_liian_suuri_alkusaldo_tayttaa_varaston(self):
+        varasto = Varasto(10, 12)
+
+        self.assertAlmostEqual(varasto.saldo, 10)
+
     def test_lisays_lisaa_saldoa(self):
         self.varasto.lisaa_varastoon(8)
 
         self.assertAlmostEqual(self.varasto.saldo, 8)
+
+    def test_negatiivista_maaraa_ei_lisata(self):
+        self.varasto.lisaa_varastoon(-1)
+
+        self.assertAlmostEqual(self.varasto.saldo, 0)
 
     def test_lisays_lisaa_pienentaa_vapaata_tilaa(self):
         self.varasto.lisaa_varastoon(8)
@@ -31,6 +54,12 @@ class TestVarasto(unittest.TestCase):
 
         self.assertAlmostEqual(saatu_maara, 2)
 
+    def test_negatiivinen_otto_palauttaa_nollan(self):
+        saatu_maara = self.varasto.ota_varastosta(-1)
+
+        self.assertAlmostEqual(saatu_maara, 0)
+        self.assertAlmostEqual(self.varasto.saldo, 0)
+
     def test_ottaminen_lisaa_tilaa(self):
         self.varasto.lisaa_varastoon(8)
 
@@ -38,3 +67,15 @@ class TestVarasto(unittest.TestCase):
 
         # varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         self.assertAlmostEqual(self.varasto.paljonko_mahtuu(), 4)
+
+    def test_varasto_ei_anna_lisata_liikaa_tavaraa(self):
+        self.varasto.lisaa_varastoon(8)
+        self.varasto.lisaa_varastoon(3)
+
+        self.assertAlmostEqual(self.varasto.saldo, 10)
+    
+    def test_ottaminen_palauttaa_kaiken_jos_otetaan_liikaa(self):
+        self.varasto.lisaa_varastoon(8)
+        self.varasto.ota_varastosta(9)
+
+        self.assertAlmostEqual(self.varasto.paljonko_mahtuu(), 10)
