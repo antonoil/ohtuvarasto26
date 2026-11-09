@@ -20,7 +20,7 @@ jobs:
         run: uv sync
 
       - name: Run Pylint
-        run: uv run pylint **/*.py
+        run: uv run pylint src
 
       - name: Run tests
         run: uv run coverage run --branch -m pytest
