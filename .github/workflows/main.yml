@@ -20,7 +20,7 @@ jobs:
         run: uv sync
 
       - name: Run Pylint
-        run: uv run pylint src
+        run: uv run pylint src --output-format=colorized
 
       - name: Run tests
         run: uv run coverage run --branch -m pytest
