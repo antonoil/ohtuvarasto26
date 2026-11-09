@@ -1,3 +1,5 @@
+"""Demo program showing how the warehouse storage behaves."""
+
 from varasto import Varasto
 
 
