@@ -5,7 +5,7 @@ class Varasto:
     """Represent a storage space with capacity and current stock level."""
 
     def __init__(self, tilavuus, alku_saldo=0):
-        """Initialize a storage unit with a total capacity and an initial balance."""
+        """Initialize storage with a capacity and an initial balance."""
         if tilavuus > 0.0:
             self.tilavuus = tilavuus
         else:
@@ -22,7 +22,7 @@ class Varasto:
             # täyteen ja ylimäärä hukkaan!
             self.saldo = tilavuus
 
-    # huom: ominaisuus voidaan myös laskea. Ei tarvita erillistä kenttää viela_tilaa tms.
+    # Ominaisuus voidaan laskea; erillistä kenttää ei tarvita.
     def paljonko_mahtuu(self):
         """Return the amount of free space left in the storage."""
         return self.tilavuus - self.saldo

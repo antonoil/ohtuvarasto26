@@ -58,7 +58,7 @@ class TestVarasto(unittest.TestCase):
         """Adding stock should decrease the amount of free space."""
         self.varasto.lisaa_varastoon(8)
 
-        # vapaata tilaa pitäisi vielä olla tilavuus-lisättävä määrä eli 2
+        # Vapaata tilaa pitäisi olla jäljellä 2.
         self.assertAlmostEqual(self.varasto.paljonko_mahtuu(), 2)
 
     def test_ottaminen_palauttaa_oikean_maaran(self):
@@ -70,7 +70,7 @@ class TestVarasto(unittest.TestCase):
         self.assertAlmostEqual(saatu_maara, 2)
 
     def test_negatiivinen_otto_palauttaa_nollan(self):
-        """A negative removal request should return zero without changing the state."""
+        """A negative removal should return zero without changing state."""
         saatu_maara = self.varasto.ota_varastosta(-1)
 
         self.assertAlmostEqual(saatu_maara, 0)
